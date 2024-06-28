@@ -7,11 +7,7 @@ body {
 }
 
 h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h2 {
     text-align: center;
 }
 
@@ -24,17 +20,31 @@ h2 {
 }
 
 article {
-    width: 50%;
+    width: 80%;
     margin: 0 auto;
     font-size: 2rem;
+    margin-bottom: 3rem;
 }
 
 @media screen and (max-width: 992px) {
+
+    html,
+    body {
+        font-size: 7px;
+    }
+
     article {
-        width: 80%;
+        width: 94%;
         margin: 0 auto;
         font-size: 2rem;
+        margin-bottom: 3rem;
     }
+
+    .blank {
+        flex: 3 !important;
+        white-space: nowrap;
+    }
+
 }
 
 .highlight {
@@ -52,6 +62,8 @@ article {
     width: max-content;
     background-color: rgba(0, 0, 0, 0.8);
     color: #fff;
+    font-size: 1.5rem;
+    font-weight: normal;
 }
 
 .catalogue {
@@ -76,4 +88,120 @@ article {
     font-size: 2rem;
     flex: 1;
     text-align: right;
+}
+
+.dialouge-name {
+    color: #00adb5;
+}
+
+.dialouge-name::after {
+    content: ":";
+    margin-right: 1.5rem;
+    font-weight: 600;
+
+}
+
+.sentence {
+    display: flex;
+    margin: 1rem 0;
+}
+
+.content::after {
+    content: attr(data-zh);
+    width: 100%;
+    display: block;
+    font-size: 1.5rem;
+    color: #3e4149;
+}
+
+.bold-text {
+    font-weight: 700;
+}
+
+
+
+.vocabulary-item {
+    display: flex;
+}
+
+.phrases {
+    flex: 2;
+    text-align: end;
+}
+
+.meaning {
+    flex: 4;
+}
+
+.phrases::after {
+    content: ":";
+    margin-right: 1.5rem;
+    font-weight: 600;
+}
+
+.exercise-item {
+    display: flex;
+    margin: 1rem 0;
+    white-space: nowrap;
+}
+
+.exercise-item::before {
+    content: attr(data-idx) ".";
+    color: #00adb5;
+    margin-right: 0.5rem;
+}
+
+.blank {
+    border-bottom: 1px dashed #000;
+    flex: 1;
+    padding: 0 1rem;
+    text-align: center;
+    min-width: 5rem;
+}
+
+#exercise {
+    margin: 0 10%;
+    overflow-x: auto;
+}
+
+#checkAnswers {
+    appearance: none;
+    background-color: #000000;
+    border: 2px solid #1A1A1A;
+    border-radius: 1rem;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline-block;
+    font-family: Roobert, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: normal;
+    margin: 0;
+    min-height: 5rem;
+    min-width: 0;
+    outline: none;
+    padding: 1.5rem 2rem;
+    text-align: center;
+    text-decoration: none;
+    transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: 50%;
+    will-change: transform;
+}
+
+#checkAnswers:disabled {
+    pointer-events: none;
+}
+
+#checkAnswers:hover {
+    box-shadow: rgba(0, 0, 0, 0.25) 0 0.8rem 1.2rem;
+    transform: translateY(-2px);
+}
+
+#checkAnswers:active {
+    box-shadow: none;
+    transform: translateY(0);
 }
