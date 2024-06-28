@@ -85,9 +85,13 @@ function setExercise() {
         const exerciseELes = exercise.map((item, idx) => {
             const labelEles = item.map(v => {
                 if (v.startsWith('${') && v.endsWith("}")) {
-                    const blankEle = document.createElement('text')
+                    const match = v.match(/\${([\s\S]*?)}/)
+                    const blankEle = document.createElement('div')
                     blankEle.className = 'blank'
                     blankEle.setAttribute('contenteditable', 'true')
+                    if (match && match[1]) {
+                        blankEle.setAttribute('data-answer', match[1])
+                    }
                     return blankEle
                 }
                 const labelEle = document.createElement('text')
@@ -116,6 +120,22 @@ checkAnswers()
 
 function checkAnswers() {
     document.querySelector('#checkAnswers').addEventListener("click", () => {
-        console.log('checkAnswers');
+        document.querySelectorAll('.blank').forEach(ele => {
+            const result = ele.textContent
+            const answer = ele.getAttribute('data-answer')
+            if (!result) {
+                return ele.classList.add('empty')
+            }
+
+            ele.classList.remove('empty')
+
+            if (result === answer) {
+                ele.classList.remove('incorrect')
+                ele.classList.add('correct')
+            } else {
+                ele.classList.remove('correct')
+                ele.classList.add('incorrect')
+            }
+        })
     })
 }

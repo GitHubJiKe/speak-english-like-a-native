@@ -150,15 +150,15 @@ export const catalogue = [
 
         ],
         exercise: [
-            ["Vic made a", "${}", "attempt to apologize."],
-            ["If there's anything I can do,", "${}", "me."],
-            ["So", "${}", "you got an invitation and not me?"],
-            ["He described the deception as a cruel", "${}", "."],
-            ["The bomb threat", "${}", "to be a hoax."],
-            ["He’s a shrewd fox! He won’t", "${}", "this easy."],
-            ["He shook the blankets vigorously to", "${}", "the dust."],
-            ["Sid's got to", "${}", "or he'll end up back in prison."],
-            ["I", "${}", "when I applied to such good colleges with my average grades."]
+            ["Vic made a", "${pathetic}", "attempt to apologize."],
+            ["If there's anything I can do,", "${count on}", "me."],
+            ["So", "${how come}", "you got an invitation and not me?"],
+            ["He described the deception as a cruel", "${hoax}", "."],
+            ["The bomb threat", "${turned out}", "to be a hoax."],
+            ["He’s a shrewd fox! He won’t", "${swallow the bait}", "this easy."],
+            ["He shook the blankets vigorously to", "${get rid of}", "the dust."],
+            ["Sid's got to", "${keep his nose clean}", "or he'll end up back in prison."],
+            ["I", "${barked up a wrong tree}", "when I applied to such good colleges with my average grades."]
         ]
     },
     {

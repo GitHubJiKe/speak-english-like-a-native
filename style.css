@@ -42,6 +42,7 @@ article {
 
     .blank {
         flex: 3 !important;
+        display: inline-block;
         white-space: nowrap;
     }
 
@@ -157,6 +158,9 @@ article {
     padding: 0 1rem;
     text-align: center;
     min-width: 5rem;
+    display: inline-block;
+    border-radius: 0.4rem;
+    margin: 0 0.5rem;
 }
 
 #exercise {
@@ -204,4 +208,22 @@ article {
 #checkAnswers:active {
     box-shadow: none;
     transform: translateY(0);
+}
+
+.correct {
+    background-color: #17b978;
+}
+
+
+.incorrect {
+    background-color: #f73859;
+}
+
+.empty {
+    background-color: #ffd460;
+}
+
+.block {
+    padding: 0.4rem 0.6rem;
+    border-radius: 0.4rem;
 }
