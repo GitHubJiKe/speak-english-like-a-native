@@ -54,7 +54,7 @@ export function fanyiSelection() {
             const data = await translate(selectedText);
             const { dst: chinese, src: english } = data["trans_result"][0];
             const { pageX: x, pageY: y } = event;
-
+            responsiveVoice.speak(english);
             const chineseEle = document.createElement("label");
             chineseEle.innerText = chinese;
             chineseEle.className = "float-fanyi";
