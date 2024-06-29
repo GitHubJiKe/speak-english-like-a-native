@@ -41,3 +41,33 @@ export async function translate(word) {
 
     return res;
 }
+
+export function fanyiSelection() {
+    function getSelectedText() {
+        const selection = window.getSelection();
+        return selection.toString();
+    }
+
+    async function handleSelectionEvent(event) {
+        const selectedText = getSelectedText();
+        if (selectedText) {
+            const data = await translate(selectedText);
+            const { dst: chinese, src: english } = data["trans_result"][0];
+            const { pageX: x, pageY: y } = event;
+
+            const chineseEle = document.createElement("label");
+            chineseEle.innerText = chinese;
+            chineseEle.className = "float-fanyi";
+            chineseEle.style.left = `${x + 30}px`;
+            chineseEle.style.top = `${y}px`;
+            chineseEle.title = english;
+            document.body.appendChild(chineseEle);
+            chineseEle.addEventListener("click", () => {
+                document.body.removeChild(chineseEle);
+            });
+        }
+    }
+
+    document.addEventListener("mouseup", handleSelectionEvent);
+    document.addEventListener("keyup", handleSelectionEvent);
+}
