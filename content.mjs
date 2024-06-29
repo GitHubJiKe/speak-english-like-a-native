@@ -1,141 +1,175 @@
-import { catalogue } from './data.mjs'
-
+import { catalogue } from "./data.mjs";
+import { translate } from "./fanyi.mjs";
 
 function getCurrentContent() {
-    return catalogue.find(item => item.id === location.search.replace('?id=', ''))
+    return catalogue.find(
+        (item) => item.id === location.search.replace("?id=", ""),
+    );
 }
 
-const current = getCurrentContent()
+const current = getCurrentContent();
 
 function setDocTitle() {
     if (current) {
-        document.title = current.en
+        document.title = current.en;
     }
 }
 
 function setPageTitle() {
     if (current) {
-        document.querySelector('h1').innerText = current.en
-        document.querySelector('h2').innerText = current.zh
+        document.querySelector("h1").innerText = current.en;
+        document.querySelector("h2").innerText = current.zh;
     }
 }
 
 function setDialog() {
     if (current) {
         const { dialogue } = current;
-        const dialogueEle = document.querySelector('#dialogue');
+        const dialogueEle = document.querySelector("#dialogue");
 
-        dialogue.forEach(item => {
+        dialogue.forEach((item) => {
             const { name, zh, sentences } = item;
-            const nameEle = document.createElement('div')
+            const nameEle = document.createElement("div");
             nameEle.innerText = name;
-            nameEle.className = 'dialouge-name';
-            const contentEleList = sentences.map(v => {
+            nameEle.className = "dialouge-name";
+            const contentEleList = sentences.map((v) => {
                 const { content, isBold, zh } = v;
-                const contentEle = document.createElement('label')
+                const contentEle = document.createElement("label");
                 contentEle.innerText = content;
                 if (isBold) {
-                    contentEle.className = 'bold-text highlight'
-                    contentEle.title = zh
+                    contentEle.className = "bold-text highlight";
+                    contentEle.title = zh;
                 }
 
-                return contentEle
-            })
+                return contentEle;
+            });
 
-            const sencenceEle = document.createElement('div')
-            sencenceEle.className = 'sentence'
-            const contentEle = document.createElement('div')
-            contentEle.className = 'content'
-            contentEle.setAttribute('data-zh', zh)
-            contentEle.append(...contentEleList)
-            sencenceEle.append(nameEle, contentEle)
-            dialogueEle.appendChild(sencenceEle)
-        })
+            const sencenceEle = document.createElement("div");
+            sencenceEle.className = "sentence";
+            const contentEle = document.createElement("div");
+            contentEle.className = "content";
+            contentEle.setAttribute("data-zh", zh);
+            contentEle.append(...contentEleList);
+            sencenceEle.append(nameEle, contentEle);
+            dialogueEle.appendChild(sencenceEle);
+        });
     }
 }
 
 function setVocabulary() {
     if (current) {
         const { vocabulary } = current;
-        const vocabularyEle = document.querySelector('#vocabulary');
-        const vocabularyItems = vocabulary.map(item => {
+        const vocabularyEle = document.querySelector("#vocabulary");
+        const vocabularyItems = vocabulary.map((item) => {
             const { phrases, meaning } = item;
-            const phrasesELe = document.createElement('div')
-            phrasesELe.innerText = phrases
-            phrasesELe.className = 'phrases bold-text'
-            const meaningEle = document.createElement('div')
-            meaningEle.innerText = meaning
-            meaningEle.className = 'meaning'
+            const phrasesELe = document.createElement("div");
+            phrasesELe.innerText = phrases;
+            phrasesELe.className = "phrases bold-text";
+            const meaningEle = document.createElement("div");
+            meaningEle.innerText = meaning;
+            meaningEle.className = "meaning";
 
-            const container = document.createElement('div')
-            container.className = 'vocabulary-item'
-            container.append(phrasesELe, meaningEle)
+            const container = document.createElement("div");
+            container.className = "vocabulary-item";
+            container.append(phrasesELe, meaningEle);
 
-            return container
-        })
+            return container;
+        });
 
-        vocabularyEle.append(...vocabularyItems)
+        vocabularyEle.append(...vocabularyItems);
     }
 }
 
 function setExercise() {
     if (current) {
         const { exercise } = current;
-        const exerciseEle = document.querySelector('#exercise');
+        const exerciseEle = document.querySelector("#exercise");
         const exerciseELes = exercise.map((item, idx) => {
-            const labelEles = item.map(v => {
-                if (v.startsWith('${') && v.endsWith("}")) {
-                    const match = v.match(/\${([\s\S]*?)}/)
-                    const blankEle = document.createElement('div')
-                    blankEle.className = 'blank'
-                    blankEle.setAttribute('contenteditable', 'true')
+            const labelEles = item.map((v) => {
+                if (v.startsWith("${") && v.endsWith("}")) {
+                    const match = v.match(/\${([\s\S]*?)}/);
+                    const blankEle = document.createElement("div");
+                    blankEle.className = "blank";
+                    blankEle.setAttribute("contenteditable", "true");
                     if (match && match[1]) {
-                        blankEle.setAttribute('data-answer', match[1])
+                        blankEle.setAttribute("data-answer", match[1]);
                     }
-                    return blankEle
+                    return blankEle;
                 }
-                const labelEle = document.createElement('text')
+                const labelEle = document.createElement("text");
                 labelEle.innerText = v;
                 return labelEle;
-            })
+            });
 
-            const exerciseELe = document.createElement('div')
-            exerciseELe.setAttribute('data-idx', idx + 1)
-            exerciseELe.className = 'exercise-item'
-            exerciseELe.append(...labelEles)
+            const exerciseELe = document.createElement("div");
+            exerciseELe.setAttribute("data-idx", idx + 1);
+            exerciseELe.className = "exercise-item";
+            exerciseELe.append(...labelEles);
 
-            return exerciseELe
-        })
+            return exerciseELe;
+        });
 
-        exerciseEle.append(...exerciseELes)
+        exerciseEle.append(...exerciseELes);
     }
 }
 
-setDocTitle()
-setPageTitle()
-setDialog()
-setVocabulary()
-setExercise()
-checkAnswers()
+setDocTitle();
+setPageTitle();
+setDialog();
+setVocabulary();
+setExercise();
+checkAnswers();
 
 function checkAnswers() {
-    document.querySelector('#checkAnswers').addEventListener("click", () => {
-        document.querySelectorAll('.blank').forEach(ele => {
-            const result = ele.textContent
-            const answer = ele.getAttribute('data-answer')
+    document.querySelector("#checkAnswers").addEventListener("click", () => {
+        document.querySelectorAll(".blank").forEach((ele) => {
+            const result = ele.textContent;
+            const answer = ele.getAttribute("data-answer");
             if (!result) {
-                return ele.classList.add('empty')
+                return ele.classList.add("empty");
             }
 
-            ele.classList.remove('empty')
+            ele.classList.remove("empty");
 
             if (result === answer) {
-                ele.classList.remove('incorrect')
-                ele.classList.add('correct')
+                ele.classList.remove("incorrect");
+                ele.classList.add("correct");
             } else {
-                ele.classList.remove('correct')
-                ele.classList.add('incorrect')
+                ele.classList.remove("correct");
+                ele.classList.add("incorrect");
             }
-        })
-    })
+        });
+    });
 }
+
+function fanyiSelection() {
+    function getSelectedText() {
+        const selection = window.getSelection();
+        return selection.toString();
+    }
+
+    async function handleSelectionEvent(event) {
+        const selectedText = getSelectedText();
+        if (selectedText) {
+            const data = await translate(selectedText);
+            const { dst: chinese, src: english } = data["trans_result"][0];
+            const { pageX: x, pageY: y } = event;
+
+            const chineseEle = document.createElement("label");
+            chineseEle.innerText = chinese;
+            chineseEle.className = "float-fanyi";
+            chineseEle.style.left = `${x + 30}px`;
+            chineseEle.style.top = `${y}px`;
+            chineseEle.title = english;
+            document.body.appendChild(chineseEle);
+            chineseEle.addEventListener("click", () => {
+                document.body.removeChild(chineseEle);
+            });
+        }
+    }
+
+    document.addEventListener("mouseup", handleSelectionEvent);
+    document.addEventListener("keyup", handleSelectionEvent);
+}
+
+fanyiSelection();

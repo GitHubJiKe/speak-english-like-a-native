@@ -27,7 +27,6 @@ article {
 }
 
 @media screen and (max-width: 992px) {
-
     html,
     body {
         font-size: 7px;
@@ -45,7 +44,6 @@ article {
         display: inline-block;
         white-space: nowrap;
     }
-
 }
 
 .highlight {
@@ -77,7 +75,6 @@ article {
     margin-bottom: 1rem;
 }
 
-
 .catalogue .english {
     color: #000;
     font-size: 2.25rem;
@@ -99,7 +96,6 @@ article {
     content: ":";
     margin-right: 1.5rem;
     font-weight: 600;
-
 }
 
 .sentence {
@@ -118,8 +114,6 @@ article {
 .bold-text {
     font-weight: 700;
 }
-
-
 
 .vocabulary-item {
     display: flex;
@@ -171,13 +165,15 @@ article {
 #checkAnswers {
     appearance: none;
     background-color: #000000;
-    border: 2px solid #1A1A1A;
+    border: 2px solid #1a1a1a;
     border-radius: 1rem;
     box-sizing: border-box;
-    color: #FFFFFF;
+    color: #ffffff;
     cursor: pointer;
     display: inline-block;
-    font-family: Roobert, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-family: Roobert, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+        "Segoe UI Symbol";
     font-size: 1.5rem;
     font-weight: 600;
     line-height: normal;
@@ -188,7 +184,7 @@ article {
     padding: 1.5rem 2rem;
     text-align: center;
     text-decoration: none;
-    transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+    transition: all 300ms cubic-bezier(0.23, 1, 0.32, 1);
     user-select: none;
     -webkit-user-select: none;
     touch-action: manipulation;
@@ -214,7 +210,6 @@ article {
     background-color: #17b978;
 }
 
-
 .incorrect {
     background-color: #f73859;
 }
@@ -226,4 +221,12 @@ article {
 .block {
     padding: 0.4rem 0.6rem;
     border-radius: 0.4rem;
+}
+
+.float-fanyi {
+    position: absolute;
+    color: #f73859;
+    font-size: 2rem;
+    font-weight: 600;
+    cursor: pointer;
 }
