@@ -27,8 +27,19 @@
                 <span class="empty block">empty</span>
             </h6>
             <div id="exercise"></div>
-            <div style="text-align: center; margin-top: 2rem">
-                <button id="checkAnswers">Check Answers</button>
+            <div
+                style="
+                    margin-top: 2rem;
+                    display: flex;
+                    gap: 2rem;
+                    justify-content: center;
+                "
+            >
+                <button id="previousSet" class="btn btn-yellow">
+                    Previous Set
+                </button>
+                <button id="checkAnswers" class="btn">Check Answers</button>
+                <button id="nextSet" class="btn btn-green">Next Set</button>
             </div>
         </article>
         <script type="module" src="content.mjs"></script>

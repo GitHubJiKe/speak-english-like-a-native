@@ -1,3 +1,4 @@
+import { readEnglish } from "./reading.mjs";
 const APP_ID = "20240219001966997";
 const APP_KEY = "wihILJ4pkBH6h1aQg3rK";
 
@@ -54,7 +55,7 @@ export function fanyiSelection() {
             const data = await translate(selectedText);
             const { dst: chinese, src: english } = data["trans_result"][0];
             const { pageX: x, pageY: y } = event;
-            responsiveVoice.speak(english);
+            readEnglish(english);
             const chineseEle = document.createElement("label");
             chineseEle.innerText = chinese;
             chineseEle.className = "float-fanyi";

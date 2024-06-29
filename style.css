@@ -3,7 +3,7 @@ body {
     padding: 0;
     margin: 0;
     border: none;
-    font-size: 12px;
+    font-size: 11px;
 }
 
 h1,
@@ -162,7 +162,7 @@ article {
     overflow-x: auto;
 }
 
-#checkAnswers {
+.btn {
     appearance: none;
     background-color: #000000;
     border: 2px solid #1a1a1a;
@@ -188,20 +188,29 @@ article {
     user-select: none;
     -webkit-user-select: none;
     touch-action: manipulation;
-    width: 50%;
+    width: 20%;
     will-change: transform;
 }
 
-#checkAnswers:disabled {
+.btn-green {
+    background-color: #17b978;
+    border: 2px solid #33ac7b;
+}
+.btn-yellow {
+    background-color: #ffd460;
+    border: 2px solid #efcd6e;
+}
+
+.btn:disabled {
     pointer-events: none;
 }
 
-#checkAnswers:hover {
+.btn:hover {
     box-shadow: rgba(0, 0, 0, 0.25) 0 0.8rem 1.2rem;
     transform: translateY(-2px);
 }
 
-#checkAnswers:active {
+.btn:active {
     box-shadow: none;
     transform: translateY(0);
 }
@@ -229,4 +238,16 @@ article {
     font-size: 2rem;
     font-weight: 600;
     cursor: pointer;
+}
+
+.icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    position: relative;
+    left: 0.5rem;
+    display: inline-block;
+}
+
+p {
+    white-space: wrap;
 }
