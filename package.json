@@ -1,0 +1,16 @@
+{
+  "name": "speak-english-like-a-native",
+  "version": "1.0.0",
+  "description": "Speak English Like A Native",
+  "main": "index.js",
+  "scripts": {},
+  "keywords": [
+    "English",
+    "Learning"
+  ],
+  "author": "peteryuan",
+  "license": "MIT",
+  "dependencies": {
+    "xlsx": "^0.18.5"
+  }
+}
