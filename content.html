@@ -1,49 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title></title>
-        <link rel="stylesheet" href="style.css" />
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
-    </head>
 
-    <body>
-        <h1></h1>
-        <h2></h2>
-        <article>
-            <h3>Dialogue</h3>
-            <div id="dialogue"></div>
-            <h3>Vocabulary</h3>
-            <div id="vocabulary"></div>
-            <h3>Exercise</h3>
-            <h5>
-                Fill in the gaps with the appropriate phrases from vocabulary:
-            </h5>
-            <h6>
-                <span class="correct block">correct</span>
-                <span class="incorrect block">incorrect</span>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+</head>
 
-                <span class="empty block">empty</span>
-            </h6>
-            <div id="exercise"></div>
-            <div
-                style="
+<body>
+    <h1></h1>
+    <article>
+        <h3>Dialogue</h3>
+        <div id="dialogue"></div>
+        <h3>Vocabulary</h3>
+        <div id="vocabulary"></div>
+        <h3>Exercise</h3>
+        <h5>
+            Fill in the gaps with the appropriate phrases from vocabulary:
+        </h5>
+        <h6>
+            <span class="correct block">correct</span>
+            <span class="incorrect block">incorrect</span>
+
+            <span class="empty block">empty</span>
+        </h6>
+        <div id="exercise"></div>
+        <div style="
                     margin-top: 2rem;
                     display: flex;
                     gap: 2rem;
                     justify-content: center;
-                "
-            >
-                <button id="previousSet" class="btn btn-yellow">
-                    Previous Set
-                </button>
-                <button id="checkAnswers" class="btn">Check Answers</button>
-                <button id="nextSet" class="btn btn-green">Next Set</button>
-            </div>
-        </article>
-        <script type="module" src="content.mjs"></script>
-        <script type="module" src="highlight.mjs"></script>
-        <script src="https://code.responsivevoice.org/responsivevoice.js?key=JbHHuDgD"></script>
-    </body>
+                ">
+            <button id="previousSet" class="btn btn-yellow">
+                Previous Set
+            </button>
+            <button id="checkAnswers" class="btn">Check Answers</button>
+            <button id="nextSet" class="btn btn-green">Next Set</button>
+        </div>
+    </article>
+    <script type="module" src="content.mjs"></script>
+    <script type="module" src="highlight.mjs"></script>
+    <script src="https://code.responsivevoice.org/responsivevoice.js?key=JbHHuDgD"></script>
+</body>
+
 </html>

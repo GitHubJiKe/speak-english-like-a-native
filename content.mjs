@@ -1,10 +1,12 @@
 import { catalogue } from "./data.mjs";
-import { fanyiSelection } from "./fanyi.mjs";
+import { fanyiSelection, } from "./fanyi.mjs";
 import { createIcon } from "./icon.mjs";
+import { readEnglish } from "./reading.mjs";
+
 
 function getCurrentContent() {
     return catalogue.find(
-        (item) => item.id === location.search.replace("?id=", ""),
+        (item) => item.id == location.search.replace("?id=", ""),
     );
 }
 
@@ -18,8 +20,10 @@ function setDocTitle() {
 
 function setPageTitle() {
     if (current) {
-        document.querySelector("h1").innerText = current.en;
-        document.querySelector("h2").innerText = current.zh;
+        const titleEle = document.querySelector("h1")
+        titleEle.innerText = current.en;
+        titleEle.append(createIcon(current.en))
+        // document.querySelector("h2").innerText = current.zh;
     }
 }
 
@@ -29,29 +33,15 @@ function setDialog() {
         const dialogueEle = document.querySelector("#dialogue");
 
         dialogue.forEach((item) => {
-            const { name, zh, sentences } = item;
+            const [name, sentence] = item;
             const nameEle = document.createElement("div");
             nameEle.innerText = name;
             nameEle.className = "dialouge-name";
-            const contentEleList = sentences.map((v) => {
-                const { content, isBold, zh } = v;
-                const contentEle = document.createElement("label");
-                contentEle.innerText = content;
-                if (isBold) {
-                    contentEle.className = "bold-text highlight";
-                    contentEle.title = zh;
-                }
-
-                return contentEle;
-            });
-
             const sencenceEle = document.createElement("p");
-
             sencenceEle.className = "sentence";
             const contentEle = document.createElement("div");
             contentEle.className = "content";
-            contentEle.setAttribute("data-zh", zh);
-            contentEle.append(...contentEleList);
+            contentEle.innerText = sentence
             const icon = createIcon(contentEle.innerText);
             sencenceEle.append(nameEle, contentEle, icon);
             dialogueEle.appendChild(sencenceEle);
@@ -64,7 +54,7 @@ function setVocabulary() {
         const { vocabulary } = current;
         const vocabularyEle = document.querySelector("#vocabulary");
         const vocabularyItems = vocabulary.map((item) => {
-            const { phrases, meaning } = item;
+            const [phrases, meaning] = item;
             const phrasesELe = document.createElement("div");
             phrasesELe.innerText = phrases;
             phrasesELe.className = "phrases bold-text";
@@ -110,8 +100,10 @@ function setExercise() {
             exerciseELe.className = "exercise-item";
             const labelEles = labelElesAndTexts.map((v) => v.ele);
             const content = labelElesAndTexts.map((v) => v.text).join(" ");
+            const lastText = labelElesAndTexts[labelElesAndTexts.length - 1].text
+            const isMatch = new RegExp(/[a-zA-Z](?![\w\s]*[a-zA-Z])$/).test(lastText)
             const icon = createIcon(content);
-            exerciseELe.append(...labelEles, icon);
+            exerciseELe.append(...labelEles, isMatch ? '.' : '', icon);
 
             return exerciseELe;
         });
@@ -147,7 +139,13 @@ function nextSet() {
     document.querySelector("#nextSet").addEventListener("click", () => {
         const id = getId();
         if (id === 100) {
-            return alert("Already Last One!");
+            const text = "Already Last One!"
+            readEnglish(text, {
+                onstart: () => {
+                    alert(text)
+                }
+            })
+            return;
         }
         location.replace(
             `${location.origin}${location.pathname}${QUERY_FIELD}${id + 1}`,
@@ -158,7 +156,13 @@ function previousSet() {
     document.querySelector("#previousSet").addEventListener("click", () => {
         const id = getId();
         if (id === 1) {
-            return alert("Already First One!");
+            const text = "Already First One!"
+            readEnglish(text, {
+                onstart: () => {
+                    alert(text)
+                }
+            })
+            return;
         }
         location.replace(
             `${location.origin}${location.pathname}${QUERY_FIELD}${id - 1}`,

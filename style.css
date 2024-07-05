@@ -27,6 +27,7 @@ article {
 }
 
 @media screen and (max-width: 992px) {
+
     html,
     body {
         font-size: 7px;
@@ -196,6 +197,7 @@ article {
     background-color: #17b978;
     border: 2px solid #33ac7b;
 }
+
 .btn-yellow {
     background-color: #ffd460;
     border: 2px solid #efcd6e;
@@ -238,11 +240,11 @@ article {
     font-size: 2rem;
     font-weight: 600;
     cursor: pointer;
+    top: 2rem;
 }
 
 .icon {
     width: 1.5rem;
-    height: 1.5rem;
     position: relative;
     left: 0.5rem;
     display: inline-block;
