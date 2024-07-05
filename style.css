@@ -27,7 +27,6 @@ article {
 }
 
 @media screen and (max-width: 992px) {
-
     html,
     body {
         font-size: 7px;
@@ -91,6 +90,7 @@ article {
 
 .dialouge-name {
     color: #00adb5;
+    white-space: nowrap;
 }
 
 .dialouge-name::after {
@@ -159,8 +159,8 @@ article {
 }
 
 #exercise {
-    margin: 0 10%;
     overflow-x: auto;
+    min-width: 98%;
 }
 
 .btn {

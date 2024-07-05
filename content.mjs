@@ -1,8 +1,7 @@
 import { catalogue } from "./data.mjs";
-import { fanyiSelection, } from "./fanyi.mjs";
+import { fanyiSelection } from "./fanyi.mjs";
 import { createIcon } from "./icon.mjs";
 import { readEnglish } from "./reading.mjs";
-
 
 function getCurrentContent() {
     return catalogue.find(
@@ -20,9 +19,9 @@ function setDocTitle() {
 
 function setPageTitle() {
     if (current) {
-        const titleEle = document.querySelector("h1")
+        const titleEle = document.querySelector("h1");
         titleEle.innerText = current.en;
-        titleEle.append(createIcon(current.en))
+        titleEle.append(createIcon(current.en));
         // document.querySelector("h2").innerText = current.zh;
     }
 }
@@ -41,9 +40,10 @@ function setDialog() {
             sencenceEle.className = "sentence";
             const contentEle = document.createElement("div");
             contentEle.className = "content";
-            contentEle.innerText = sentence
+            contentEle.innerText = sentence;
             const icon = createIcon(contentEle.innerText);
-            sencenceEle.append(nameEle, contentEle, icon);
+            contentEle.append(icon);
+            sencenceEle.append(nameEle, contentEle);
             dialogueEle.appendChild(sencenceEle);
         });
     }
@@ -100,10 +100,13 @@ function setExercise() {
             exerciseELe.className = "exercise-item";
             const labelEles = labelElesAndTexts.map((v) => v.ele);
             const content = labelElesAndTexts.map((v) => v.text).join(" ");
-            const lastText = labelElesAndTexts[labelElesAndTexts.length - 1].text
-            const isMatch = new RegExp(/[a-zA-Z](?![\w\s]*[a-zA-Z])$/).test(lastText)
+            const lastText =
+                labelElesAndTexts[labelElesAndTexts.length - 1].text;
+            const isMatch = new RegExp(/[a-zA-Z](?![\w\s]*[a-zA-Z])$/).test(
+                lastText,
+            );
             const icon = createIcon(content);
-            exerciseELe.append(...labelEles, isMatch ? '.' : '', icon);
+            exerciseELe.append(...labelEles, isMatch ? "." : "", icon);
 
             return exerciseELe;
         });
@@ -114,7 +117,8 @@ function setExercise() {
 
 function checkAnswers() {
     document.querySelector("#checkAnswers").addEventListener("click", () => {
-        document.querySelectorAll(".blank").forEach((ele) => {
+        const blanks = document.querySelectorAll(".blank");
+        blanks.forEach((ele) => {
             const result = ele.textContent;
             const answer = ele.getAttribute("data-answer");
             if (!result) {
@@ -131,6 +135,17 @@ function checkAnswers() {
                 ele.classList.add("incorrect");
             }
         });
+        const correctLen = document.querySelectorAll(".correct").length - 1;
+        const allRight = blanks.length === correctLen;
+        if (allRight) {
+            const msg = "All Correct! Congratulations! Go to Next One?";
+            readEnglish(msg, {
+                onstart: () => {
+                    const yes = window.confirm(msg);
+                    yes && document.querySelector("#nextSet").click();
+                },
+            });
+        }
     });
 }
 const getId = () => Number(location.search.replace(QUERY_FIELD, ""));
@@ -139,12 +154,12 @@ function nextSet() {
     document.querySelector("#nextSet").addEventListener("click", () => {
         const id = getId();
         if (id === 100) {
-            const text = "Already Last One!"
+            const text = "Already Last One!";
             readEnglish(text, {
                 onstart: () => {
-                    alert(text)
-                }
-            })
+                    alert(text);
+                },
+            });
             return;
         }
         location.replace(
@@ -156,12 +171,12 @@ function previousSet() {
     document.querySelector("#previousSet").addEventListener("click", () => {
         const id = getId();
         if (id === 1) {
-            const text = "Already First One!"
+            const text = "Already First One!";
             readEnglish(text, {
                 onstart: () => {
-                    alert(text)
-                }
-            })
+                    alert(text);
+                },
+            });
             return;
         }
         location.replace(
