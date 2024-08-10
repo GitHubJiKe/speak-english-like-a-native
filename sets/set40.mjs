@@ -1,0 +1,1 @@
+export const set40 = {"en":"","zh":"","id":40,"dialogue":[],"vocabulary":[],"exercise":[]};

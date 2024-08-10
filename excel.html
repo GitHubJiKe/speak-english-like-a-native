@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Excel Viewer</title>
+        <style>
+            table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+            table,
+            th,
+            td {
+                border: 1px solid black;
+            }
+            th,
+            td {
+                padding: 8px;
+                text-align: left;
+            }
+        </style>
+    </head>
+    <body>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+        <script>
+            async function loadExcel() {
+                var fileUrl =
+                    "https://githubjike.github.io/speak-english-like-a-native/sets/sets.xls";
+
+                try {
+                    let response = await fetch(fileUrl);
+                    if (!response.ok) {
+                        throw new Error("Network response was not ok");
+                    }
+                    let data = await response.arrayBuffer();
+                    let workbook = XLSX.read(new Uint8Array(data), {
+                        type: "array",
+                    });
+                    workbook.SheetNames.forEach((sheetName) => {
+                        let worksheet = workbook.Sheets[sheetName];
+                        let html = XLSX.utils.sheet_to_html(worksheet);
+                        const tableEle = document.createElement("table");
+                        tableEle.innerHTML = html;
+                        document.body.append(tableEle);
+                    });
+                } catch (error) {
+                    console.error(
+                        "Error fetching or processing the file:",
+                        error,
+                    );
+                    alert("Error fetching or processing the file");
+                }
+            }
+
+            loadExcel();
+        </script>
+    </body>
+</html>

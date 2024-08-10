@@ -90,7 +90,7 @@ function setExercise() {
                     }
                     return { ele: blankEle, text: match[1] };
                 }
-                const labelEle = document.createElement("text");
+                const labelEle = document.createElement("div");
                 labelEle.innerText = v;
                 return { ele: labelEle, text: v };
             });
